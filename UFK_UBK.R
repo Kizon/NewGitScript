@@ -1,22 +1,22 @@
-# »ÆºÓÕ¾µã¾¶Á÷Êı¾İMKÍ»±ä¼ì²â ufk/ubk
+# é»„æ²³ç«™ç‚¹å¾„æµæ•°æ®MKçªå˜æ£€æµ‹ ufk/ubk
 rm(list = ls(all = TRUE))
-setwd('E:\\project\\»ÆºÓ') #ÉèÖÃ¹¤×÷¿Õ¼ä
-source("Mann_Kendall.R") #µ¼ÈëmkTrendº¯Êı
-flowData<-read.csv("»ÆºÓÁ÷Óò37Ë®ÎÄÕ¾ÔÂ¾¶Á÷Á¿Êı¾İ_ÍòÁ¢·½Ã×Ã¿ÔÂ.csv",header = TRUE) #¶ÁÈë¾¶Á÷Êı¾İ
-nStation<-length(unique(flowData[,2])) # µÚ¶şÁĞÎªË®ÎÄÕ¾£¬»ñÈ¡Ë®ÎÄÕ¾µÄ¸öÊı¸³ÖµÎªn=37£»
-nYear<-max(flowData[,3])-min(flowData[,3])+1 #¼ÆËãÄê·İ¼´1960-2000ÄêÊı£¬41Äê£»
+setwd('E:\\project\\é»„æ²³') #è®¾ç½®å·¥ä½œç©ºé—´
+source("Mann_Kendall.R") #å¯¼å…¥mkTrendå‡½æ•°
+flowData<-read.csv("é»„æ²³æµåŸŸ37æ°´æ–‡ç«™æœˆå¾„æµé‡æ•°æ®_ä¸‡ç«‹æ–¹ç±³æ¯æœˆ.csv",header = TRUE) #è¯»å…¥å¾„æµæ•°æ®
+nStation<-length(unique(flowData[,2])) # ç¬¬äºŒåˆ—ä¸ºæ°´æ–‡ç«™ï¼Œè·å–æ°´æ–‡ç«™çš„ä¸ªæ•°èµ‹å€¼ä¸ºn=37ï¼›
+nYear<-max(flowData[,3])-min(flowData[,3])+1 #è®¡ç®—å¹´ä»½å³1960-2000å¹´æ•°ï¼Œ41å¹´ï¼›
 
-YearFlow<-rowSums(flowData[,4:15]) #12¸öÔÂ·İÏà¼Ó=>Äê¾¶Á÷Á¿£¬ÎªÒ»Î¬Êı×é;
-YearFlow<-array(YearFlow,dim = c(41,37)) #Êı×éÖØ×éÎª41*37µÄ¶şÎ¬Êı×é£»µÚÒ»Î¬±íÊ¾Ê±¼ä£¬¶şÎ¬±íÊ¾Õ¾µã£»
+YearFlow<-rowSums(flowData[,4:15]) #12ä¸ªæœˆä»½ç›¸åŠ =>å¹´å¾„æµé‡ï¼Œä¸ºä¸€ç»´æ•°ç»„;
+YearFlow<-array(YearFlow,dim = c(41,37)) #æ•°ç»„é‡ç»„ä¸º41*37çš„äºŒç»´æ•°ç»„ï¼›ç¬¬ä¸€ç»´è¡¨ç¤ºæ—¶é—´ï¼ŒäºŒç»´è¡¨ç¤ºç«™ç‚¹ï¼›
 YearFlow<-as.data.frame(YearFlow)
-colnames(YearFlow) <-unique(flowData[,2]) #ÉèÖÃÁĞÃûÎªÕ¾µã´úºÅ328-366£»
-rownames(YearFlow) <-unique(flowData[,3]) #ÉèÖÃĞĞÃûÎªÄê·İ1960-2000£»
-#ÒÔÉÏ´¦ÀíµÃµ½»ÆºÓÁ÷Óò37¸öË®ÎÄÕ¾1960-2000Äê41ÄêµÄÄê¾¶Á÷Êı¾İYearFlow¡£
+colnames(YearFlow) <-unique(flowData[,2]) #è®¾ç½®åˆ—åä¸ºç«™ç‚¹ä»£å·328-366ï¼›
+rownames(YearFlow) <-unique(flowData[,3]) #è®¾ç½®è¡Œåä¸ºå¹´ä»½1960-2000ï¼›
+#ä»¥ä¸Šå¤„ç†å¾—åˆ°é»„æ²³æµåŸŸ37ä¸ªæ°´æ–‡ç«™1960-2000å¹´41å¹´çš„å¹´å¾„æµæ•°æ®YearFlowã€‚
 # View(flowData)
-Flow<-read.csv("»ÆºÓÄê¼¾ÔÂ¾¶Á÷.csv",header = TRUE) #¶ÁÈ¡Õ¾µã¸÷ÄêÄê¼¾ÔÂµÄ¾¶Á÷
+Flow<-read.csv("é»„æ²³å¹´å­£æœˆå¾„æµ.csv",header = TRUE) #è¯»å–ç«™ç‚¹å„å¹´å¹´å­£æœˆçš„å¾„æµ
 
-# µäĞÍÕ¾µãÌáÈ¡
-Ulz334<-Flow[247:287,] #ÉÏÓÎÁ÷ÓòÀ¼ÖİÕ¾334Êı¾İ
+# å…¸å‹ç«™ç‚¹æå–
+Ulz334<-Flow[247:287,] #ä¸Šæ¸¸æµåŸŸå…°å·ç«™334æ•°æ®
 n1=c(1,12,22,32)
 n2=c(11,21,31,41)
 averSs<-matrix(NA,nrow = 4,ncol = 4)
@@ -24,37 +24,33 @@ for(i in 1:4){
     averSs[i,]<-apply(Ulz334[n1[i]:n2[i],4:7],MARGIN=2,mean)
 }
 
-
-Ugd331<-Flow[124:164,] #ÉÏÓÎÁ÷Óò¹óµÂÕ¾331Êı¾İ
+Ugd331<-Flow[124:164,] #ä¸Šæ¸¸æµåŸŸè´µå¾·ç«™331æ•°æ®
 for(i in 1:4){
   averSs[i,]<-apply(Ugd331[n1[i]:n2[i],4:7],MARGIN=2,mean)
 }
-Msm338<-Flow[411:451,] #ÖĞÓÎÁ÷ÓòÈıÃÅÏ¿Õ¾338Êı¾İ
+Msm338<-Flow[411:451,] #ä¸­æ¸¸æµåŸŸä¸‰é—¨å³¡ç«™338æ•°æ®
 for(i in 1:4){
   averSs[i,]<-apply(Msm338[n1[i]:n2[i],4:7],MARGIN=2,mean)
 }
-Mlm337<-Flow[370:410,] #ÖĞÓÎÁ÷ÓòÁúÃÅÏ¿Õ¾337Êı¾İ
+Mlm337<-Flow[370:410,] #ä¸­æ¸¸æµåŸŸé¾™é—¨å³¡ç«™337æ•°æ®
 for(i in 1:4){
   averSs[i,]<-apply(Mlm337[n1[i]:n2[i],4:7],MARGIN=2,mean)
 }
-Dlj333<-Flow[206:246,] #ÏÂÓÎÁ÷ÓòÀû½òÕ¾333Êı¾İ
+Dlj333<-Flow[206:246,] #ä¸‹æ¸¸æµåŸŸåˆ©æ´¥ç«™333æ•°æ®
 for(i in 1:4){
   averSs[i,]<-apply(Dlj333[n1[i]:n2[i],4:7],MARGIN=2,mean)
 }
-Dhyk340<-Flow[493:533,] #ÏÂÓÎÁ÷Óò»¨Ô°¿ÚÕ¾340Êı¾İ
+Dhyk340<-Flow[493:533,] #ä¸‹æ¸¸æµåŸŸèŠ±å›­å£ç«™340æ•°æ®
 for(i in 1:4){
   averSs[i,]<-apply(Dhyk340[n1[i]:n2[i],4:7],MARGIN=2,mean)
 }
-
-
-
-UMD_Yr<-YearFlow[,c(4,7,10,11,13,6)] # ÉÏÖĞÏÂÓÎµäĞÍÕ¾ÄêÁ÷Á¿
+UMD_Yr<-YearFlow[,c(4,7,10,11,13,6)] # ä¸Šä¸­ä¸‹æ¸¸å…¸å‹ç«™å¹´æµé‡
 write.csv(UMD_Yr,file ="UMD_Yr.csv")
 UMD_YrUF<-matrix(NA,nrow=41,ncol = 6)
 UMD_YrUB<-matrix(NA,nrow=41,ncol = 6)
 for(i in 1:6){
   Temp<-UMD_Yr[,i]
-  UMDYrLST<-Mann_Kendall(Temp)# Ô­º¯ÊıµÄ·µ»ØÖµÎª£ºLST <- list(UF=y1,UB=y2),ufk<-YearLST$UF$U,ubkÍ¬Àí£»
+  UMDYrLST<-Mann_Kendall(Temp)# åŸå‡½æ•°çš„è¿”å›å€¼ä¸ºï¼šLST <- list(UF=y1,UB=y2),ufk<-YearLST$UF$U,ubkåŒç†ï¼›
   yUF <- as.data.frame(UMDYrLST$UF[3])$U #ufk
   yUB <- as.data.frame(UMDYrLST$UB[3])$U #ubk
   UMD_YrUF[,i]<-t(yUF)
@@ -63,41 +59,28 @@ for(i in 1:6){
 write.csv(UMD_YrUF,file ="UMD_YrUF.csv")
 write.csv(UMD_YrUB,file ="UMD_YrUB.csv")
 rm(Temp)
-
-#==========================================Äê¾¶Á÷Í»±ä»æÍ¼=========================================================#
-#ÒÔÏÂ¿ªÊ¼Äê¾¶Á÷mkÍ»±ä¼ìÑé
-YearTol<-rowSums(YearFlow) #Ã¿ĞĞµÄ¸÷ÁĞ¼ä»¥ÏàÏà¼ÓµÃµ½41ÄêÃ¿ÄêËùÓĞ37¸öË®ÎÄÕ¾µÄ¾¶Á÷×ÜºÍ£»
-YearLST<-Mann_Kendall(YearTol) # Ô­º¯ÊıµÄ·µ»ØÖµÎª£ºLST <- list(UF=y1,UB=y2),ufk<-YearLST$UF$U,ubkÍ¬Àí£»
+#==========================================å¹´å¾„æµçªå˜ç»˜å›¾=========================================================#
+#ä»¥ä¸‹å¼€å§‹å¹´å¾„æµmkçªå˜æ£€éªŒ
+YearTol<-rowSums(YearFlow) #æ¯è¡Œçš„å„åˆ—é—´äº’ç›¸ç›¸åŠ å¾—åˆ°41å¹´æ¯å¹´æ‰€æœ‰37ä¸ªæ°´æ–‡ç«™çš„å¾„æµæ€»å’Œï¼›
+YearLST<-Mann_Kendall(YearTol) # åŸå‡½æ•°çš„è¿”å›å€¼ä¸ºï¼šLST <- list(UF=y1,UB=y2),ufk<-YearLST$UF$U,ubkåŒç†ï¼›
 Year_ufk<-YearLST$UF$U #ufk
 Year_ubk<-YearLST$UB$U #ubk
-#ÒÔÉÏÎªÄê¾¶Á÷µÄmkÍ»±ä¼ìÑé
+#ä»¥ä¸Šä¸ºå¹´å¾„æµçš„mkçªå˜æ£€éªŒ
 
-# ×÷Í¼
+# ä½œå›¾
 yUF <- as.data.frame(YearLST$UF[3])$U #ufk
 yUB <- as.data.frame(YearLST$UB[3])$U #ubk
 
 DYear<-as.numeric(rownames(YearFlow))
 x<-c(DYear)
-# 
-# plot(x,y=yUF, type="l", xlim=c(1961,1999),ylim=c(min(yUF,yUB,-1.96),max(yUF,yUB,1.96)),lwd=2, lty=1,xaxt="n", xlab="",
-#      ylab="", cex=0.5,mgp=c(1,0.1,0),tck=0.01)
-# points(x,y=yUB,type="l",lty=2,col=1,lwd=2)
-# abline(h=1.96,lty=4,lwd=0.5)# 1.96ÊÇa=0.05µÄÏÔÖøĞÔË®Æ½
-# abline(h=-1.96,lty=4,lwd=0.5)
-# abline(h=0,col="gray",lwd=0.5)
-# legend("topright",c("UFk", "UBk"),lty = c(1,3),lwd = 2,bty="n", y.intersp = 2, ncol = 1)
-# axis(1,labels=c(1960,1970,1980,1990,2000),at=c(1960,1970,1980,1990,2000),tck=0.01,mgp=c(1,0.1,0),las=1) # at±íÊ¾ÔÚxÖáÖµ¸Ã´¦»­±êÇ©£¬±êÇ©ÖµÎªlabels
-# #box()
-
-#
 F_UB<-matrix(NA,nrow=41,ncol=5)
 F_UF<-matrix(NA,nrow=41,ncol=5)
 F_UF[,1]<-t(yUF)
 F_UB[,1]<-t(yUB)
 
-#==========================================ËÄ¼¾¾¶Á÷Í»±ä»æÍ¼=========================================================#
+#==========================================å››å­£å¾„æµçªå˜ç»˜å›¾=========================================================#
 
-Season<-array(0,dim = c(41,37,4)) #ÈıÎ¬Êı×é´¢´æ¼¾½Ú¾¶Á÷£¬µÚÒ»Î¬ÎªÄê·İ£¬µÚ¶şÎ¬ÎªÕ¾µã£¬µÚÈıÎ¬Îª¼¾½Ú
+Season<-array(0,dim = c(41,37,4)) #ä¸‰ç»´æ•°ç»„å‚¨å­˜å­£èŠ‚å¾„æµï¼Œç¬¬ä¸€ç»´ä¸ºå¹´ä»½ï¼Œç¬¬äºŒç»´ä¸ºç«™ç‚¹ï¼Œç¬¬ä¸‰ç»´ä¸ºå­£èŠ‚
 
 for(i in 1:4){
   for(j in 1:37){
@@ -125,7 +108,7 @@ for (i in 1:6){
     UMDSsJP[,nn]<-t(UMDSs-meanTemp)
     UMDSsLJP[,nn]<-cumsum(UMDSsJP[,nn])
     
-    UMDSsLST<-Mann_Kendall(UMDSs)# Ô­º¯ÊıµÄ·µ»ØÖµÎª£ºLST <- list(UF=y1,UB=y2),ufk<-YearLST$UF$U,ubkÍ¬Àí£»
+    UMDSsLST<-Mann_Kendall(UMDSs)# åŸå‡½æ•°çš„è¿”å›å€¼ä¸ºï¼šLST <- list(UF=y1,UB=y2),ufk<-YearLST$UF$U,ubkåŒç†ï¼›
     yUF <- as.data.frame(UMDSsLST$UF[3])$U #ufk
     yUB <- as.data.frame(UMDSsLST$UB[3])$U #ubk
     
@@ -141,33 +124,23 @@ write.csv(UMDSsLJP,file = "UMDSsLJP.csv")
 
 SeasonF<-matrix(NA,nrow = 41,ncol = 4)
 for(i in 1:4){
-  SeasonTol<-rowSums(Season[,,i]) #Ã¿ĞĞµÄ¸÷ÁĞ¼ä»¥ÏàÏà¼ÓµÃµ½41ÄêÃ¿ÄêËùÓĞ37¸öË®ÎÄÕ¾µÄ¾¶Á÷×ÜºÍ£»
+  SeasonTol<-rowSums(Season[,,i]) #æ¯è¡Œçš„å„åˆ—é—´äº’ç›¸ç›¸åŠ å¾—åˆ°41å¹´æ¯å¹´æ‰€æœ‰37ä¸ªæ°´æ–‡ç«™çš„å¾„æµæ€»å’Œï¼›
   SeasonF[,i]<-t(SeasonTol)
-  SeasonLST<-Mann_Kendall(SeasonTol) # Ô­º¯ÊıµÄ·µ»ØÖµÎª£ºLST <- list(UF=y1,UB=y2),ufk<-YearLST$UF$U,ubkÍ¬Àí£»
+  SeasonLST<-Mann_Kendall(SeasonTol) # åŸå‡½æ•°çš„è¿”å›å€¼ä¸ºï¼šLST <- list(UF=y1,UB=y2),ufk<-YearLST$UF$U,ubkåŒç†ï¼›
   Season_ufk<-SeasonLST$UF$U #ufk
   Season_ubk<-SeasonLST$UB$U #ubk
   t<-i+1
  
-  #ÒÔÉÏÎªÄê¾¶Á÷µÄmkÍ»±ä¼ìÑé
+  #ä»¥ä¸Šä¸ºå¹´å¾„æµçš„mkçªå˜æ£€éªŒ
   
-  # ×÷Í¼
+  # ä½œå›¾
   yUF <- as.data.frame(SeasonLST$UF[3])$U #ufk
   yUB <- as.data.frame(SeasonLST$UB[3])$U #ubk
   F_UF[,t]<-t(yUF)
   F_UB[,t]<-t(yUB)
   DYear<-as.numeric(rownames(YearFlow))
   x<-c(DYear)
-  
-#   plot(x,y=yUF, type="l", xlim=c(1961,1999),ylim=c(min(yUF,yUB,-1.96),max(yUF,yUB,1.96)),lwd=2, lty=1,xaxt="n", xlab="",
-#        ylab="",cex=0.5,mgp=c(1,0.1,0),tck=0.01)
-#   points(x,y=yUB,type="l",lty=2,col=1,lwd=2)
-#   abline(h=1.96,lty=4,lwd=0.5)# 1.96ÊÇa=0.05µÄÏÔÖøĞÔË®Æ½
-#   abline(h=-1.96,lty=4,lwd=0.5)
-#   abline(h=0,col="gray",lwd=0.5)
-#   #legend("topright",c("UFk", "UBk"),lty = c(1,3),lwd = 2,bty="n", y.intersp = 2, ncol = 1)
-#   axis(1,labels=c(1960,1970,1980,1990,2000),at=c(1960,1970,1980,1990,2000),tck=0.01,mgp=c(1,0.1,0),las=1) # at±íÊ¾ÔÚxÖáÖµ¸Ã´¦»­±êÇ©£¬±êÇ©ÖµÎªlabels
-  }
-
+}
 SeasonF<-as.data.frame(SeasonF)
 rownames(F_UF)<-unique(flowData[,3])
 rownames(F_UB)<-unique(flowData[,3])
@@ -175,70 +148,11 @@ F_UB<-as.data.frame(F_UB)
 F_UF<-as.data.frame(F_UF)
 colnames(F_UF)<-c("year","spring","summer","autumn","winter")
 colnames(F_UB)<-c("year","spring","summer","autumn","winter")
-# write.csv(F_UF, file = "F_UF.csv",col.names = TRUE,row.names = TRUE)
-# write.csv(F_UB, file = "F_UB.csv",col.names = TRUE,row.names = TRUE)
-# rm(list = ls(all = TRUE))
-# setwd("G:/»ÆºÓ/0")
-# Fvalue<-read.csv("Fvalue.csv",header = TRUE)
-# YearA<-cbind(Fvalue[,2],Fvalue[,3])
-# rownames(YearA)<-Fvalue[,1]
-# colnames(YearA)<-c("year","Äê")
-# YearA<-data.frame(YearA)
-# plot(YearA$year,YearA$Äê,type = "l",lwd = 2,lty = 1, xaxt = "n",xlab = "",ylab = "",cex = 0.5, tck=0.01,mgp=c(1,0.1,0))
-# axis(1,labels=c(1960,1970,1980,1990,2000,2014),at=c(1960,1970,1980,1990,2000,2014),tck=0.01,las=1,mgp=c(1,0.1,0))
-# abline(h=mean(YearA$Äê),lty = 6,lwd = 2,col = "black") #¾ùÖµ
-# h1=mean(YearA$Äê[1:44])
-# segments(1960,h1,2002,h1,lty = 6,lwd = 2,col = "black")
-# h2=mean(YearA$Äê[45:55])
-# segments(2003,h2,2014,h2,lty = 6,lwd = 2,col = "black")
-# Y<-YearA$Äê
-# x<-YearA$year
-# model<-lm(Y~x,data = YearA)
-# abline(model,col = "black",lty=3,lwd=2)#ÏßĞÔ»Ø¹é
 YrF<-matrix(NA,nrow = 41,ncol = 2)
 YrF[,1]<-t(DYear)
 YrF[,2]<-t(YearTol)
-YrF<-data.frame(YrF) #Äê¾¶Á÷×ÜÁ¿
+YrF<-data.frame(YrF) #å¹´å¾„æµæ€»é‡
 colnames(YrF)<-c("year","nian")
-# plot(YrF$year,YrF$nian,type = "l",lwd = 2,lty = 1, xaxt = "n",xlab = "",ylab = "",cex = 0.5, tck=0.01,mgp=c(1,0.1,0))
-# axis(1,labels=c(1960,1970,1980,1990,2000),at=c(1960,1970,1980,1990,2000),tck=0.01,mgp=c(1,0.1,0),las=1) # at±íÊ¾ÔÚxÖáÖµ¸Ã´¦»­±êÇ©£¬±êÇ©ÖµÎªlabels
-# abline(h=mean(YrF$nian),lty = 6,lwd = 2,col = "black")
-# h1=mean(YrF$nian[1:34])
-# segments(1960,h1,1993,h1,lty = 6,lwd = 2,col = "black")
-# h2=mean(YrF$nian[34:41])
-# segments(1993,h2,2000,h2,lty = 6,lwd = 2,col = "black")
-# Y<-YrF$nian
-# x<-YrF$year
-# model<-lm(Y~x,data = YrF)
-# abline(model,col = "black",lty=3,lwd=2) #ÏßĞÔ»Ø¹é
-# summary(model)
-# dev.off()
-# ======================================== ¾à Æ½ Öµ ================================================= #
-# m_Yr<-mean(YrF[,2])
-# JP_Yr<-YrF[,2]-m_Yr
-# JP_Yr<-t(t(JP_Yr))
-# LJP_Yr<-cumsum(JP_Yr)
-# LJP_Yr<-t(t(LJP_Yr))
-# JP_Ss<-matrix(NA,nrow = 41,ncol = 4)
-# LJP_Ss<-matrix(NA,nrow = 41,ncol = 4)
-# m_Ss<-matrix(NA,nrow = 1,ncol = 4)
-# for(i in 1:4){
-#   m_Ss[i]<-mean(SeasonF[,i])
-#   JP_Ss[,i]<-SeasonF[,i]-m_Ss[i]
-#   LJP_Ss[,i]<-cumsum(JP_Ss[,i])
-# }
-# JP<-matrix(NA,nrow = 41,ncol = 5)
-# LJP<-matrix(NA,nrow = 41,ncol = 5)
-# JP[,1]<-JP_Yr
-# JP[,2:5]<-JP_Ss
-# LJP[,1]<-LJP_Yr
-# LJP[,2:5]<-LJP_Ss
-# JP<-as.data.frame(JP)
-# LJP<-as.data.frame(LJP)
-# write.csv(JP,file = "JP.csv")
-# write.csv(LJP,file ="LJP.csv")
-# write.csv(YrF,file ="YrF.csv")
-# write.csv(SeasonF,file ="SeasonF.csv")
 
 UMDJP_Yr<-matrix(NA,nrow = 41,ncol = 6)
 UMDLJP_Yr<-matrix(NA,nrow = 41,ncol = 6)
@@ -249,4 +163,3 @@ for(i in 1:6){
 }
 write.csv(UMDJP_Yr,file ="UMDJP_Yr.csv")
 write.csv(UMDLJP_Yr,file ="UMDLJP_Yr.csv")
-
