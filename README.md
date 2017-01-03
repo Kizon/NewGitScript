@@ -1,0 +1,2 @@
+# NewGitScript
+exampleOfGithub
